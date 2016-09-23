@@ -2,6 +2,8 @@ require 'csv'
 require_relative 'rating'
 require_relative 'movie'
 require_relative 'run'
+require_relative 'file_reading'
+require_relative 'array_mods'
 
 class User
 

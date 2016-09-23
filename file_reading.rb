@@ -1,24 +1,21 @@
 require 'csv'
-#
-# def csv_to_array(filename)
-#   csv = CSV::parse(File.open(filename, 'r:ISO-8859-1') { |f| f.read })
-#   fields = csv.shift
-#   fields = fields.map { |f| f.downcase.gsub(" ", "_") }
-#   movies_users_ratings = csv.collect { |record| Hash[*fields.zip(record).flatten ] }
-#   puts movies_users_ratings[25..28]
-# end
-#
-# csv_to_array('data.csv')
-
-
-
+require_relative 'array_mods'
 
 def csv_to_array(filename)
-    csv = CSV::parse(File.open(filename, 'r:ISO-8859-1') {|f| f.read })
+    csv = CSV::parse(File.open('data.csv', 'r:ISO-8859-1') {|line| line.read })
     fields = csv.shift
     fields = fields.map {|f| f.downcase.gsub(" ", "_")}
-    variable = csv.collect { |record| Hash[*fields.zip(record).flatten ] }
-    puts variable[25..28]
+    movies_ratings_users = csv.collect { |record| Array[*fields.zip(record).flatten ] }
+    return movies_ratings_users
 end
 
-csv_to_array('data.csv')
+all_movies = csv_to_array('data.csv')
+
+all_movies[1] = all_movies.vget_odd_indexes
+
+
+puts "#{all_movies[1]}"
+# ITS WORRRRRKINGGG!!!
+
+# new_hash = {}
+# all_movies.each { |i| new_hash[i] = hash.delete(i)}

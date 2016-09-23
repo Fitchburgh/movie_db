@@ -2,6 +2,8 @@ require_relative '../run'
 require_relative '../user'
 require_relative '../movie'
 require_relative '../rating'
+require_relative 'array_mods'
+require_relative 'file_reading'
 require 'csv'
 
 # describe Movie do
