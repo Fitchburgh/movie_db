@@ -7,7 +7,15 @@ require_relative 'array_mods'
 
 
 def main
+  print "\n"
+  print "\n"
+  print "\n"
+  print "\n"
   puts "Welcome to ShitFlyx!  Booting up the database..."
+  print "\n"
+  print "\n"
+  print "\n"
+  
   # running all initial startup database structuring
 
   # pulling all movieID's and sorting them
@@ -22,10 +30,7 @@ def main
   movie_by_id_compile(all_movies_info, unsorted_info)
 
   # initializing the first movie ID to gather details for
-  print "\n"
-  print "\n"
-  print "\n"
-  print "\n"
+
   puts "Please enter a MovieID to begin: "
   movie_id = gets.chomp.to_i
   new_movie = Movie.new(movie_id)

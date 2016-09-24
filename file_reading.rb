@@ -32,7 +32,7 @@ end
 # movie_by_id = movie_to_array('item.csv')
 
 def movie_by_id_compile(all_movies_info, unsorted_info)
-  temp = all_movies_info[0..5].sort_by { |row| row[:movie_id] }.each do |row|
+  temp = all_movies_info.sort_by { |row| row[:movie_id] }.each do |row|
   unsorted_info << [row['movie_id'].to_i, row['title'].to_s]
   end
 end
