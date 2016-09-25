@@ -1,3 +1,4 @@
+require 'pry'
 require 'csv'
 require_relative 'rating'
 require_relative 'movie'
@@ -7,21 +8,23 @@ require_relative 'array_mods'
 
 class User
 
-  attr_reader :user_id, #:age, :gender, :job
+  attr_reader :user_id, :gender, :job, :ratings_per_movie
 
-  def initialize(user_id) # age, gender, job)
-    @user_id = user_id
-    # @age = age
-    # @gender = gender
-    # @job = job
+  def initialize(*args) # age, gender, job)
+    @user_id, @gender, @job, @ratings_per_movie = *args
   end
 
-  def get_user_id()
-
+  def users_total_ratings(user_id_and_ratings, user_id)
+    @ratings_per_movie = []
+    user_id_and_ratings.each do |idsort|
+      if idsort[0] == user_id
+        @ratings_per_movie <<  [idsort[1], idsort[2]]
+      end
+    end
   end
 
-  col_data = []
-  CSV.foreach('user.csv', 'r:ISO-8859-1') {|row| col_data << row[0]}
-  user_id =  col_data[1].split('|')
+
+
+
 
 end

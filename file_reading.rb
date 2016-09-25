@@ -4,12 +4,16 @@ require 'pry'
 
 # This file should run first to build the databases and read the files.
 # This might be a run main on its own in order to startup the system.
-def bootup(movie_id_and_rating, unsorted_info)
+def bootup(movie_id_and_rating, unsorted_info, user_id_and_ratings)
 
   csv = CSV.parse(File.open('data.csv', 'r:ISO-8859-1') { |line| line.read })
   fields = csv.shift
   fields = fields.map { |f| f.downcase.gsub(' ', '_') }
   all_movies = csv.collect { |record| Hash[*fields.zip(record).flatten] }
+
+  all_movies.sort_by { |user| user[:user_id] }.each do |user|
+    user_id_and_ratings << [user['user_id'].to_i, user['movie_id'].to_i, user['rating'].to_i]
+  end
 
   # movie_id_and_rating = []
   all_movies.sort_by { |movie| movie[:movie_id] }.each do |movie|
@@ -24,7 +28,7 @@ def bootup(movie_id_and_rating, unsorted_info)
   # movie_by_id = movie_to_array('item.csv')
 
   movie_titles.sort_by { |row| row[:movie_id] }.each do |row|
-  unsorted_info << [row['movie_id'].to_i, row['title'].to_s]
+    unsorted_info << [row['movie_id'].to_i, row['title'].to_s]
   end
 end
 
