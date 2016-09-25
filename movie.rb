@@ -16,8 +16,6 @@ class Movie
   def title_by_id(temp1, movie_id)
     temp1.each do |row|
       if row[0] == @movie_id
-        puts "movie id = #{row[0]}"
-        puts "title = #{row[1]}"
         @title = row[1]
       end
     end

@@ -4,38 +4,31 @@ require 'pry'
 
 # This file should run first to build the databases and read the files.
 # This might be a run main on its own in order to startup the system.
+def bootup(movie_id_and_rating, unsorted_info)
 
-def csv_to_array(filename)
-  csv = CSV.parse(File.open(filename, 'r:ISO-8859-1') { |line| line.read })
+  csv = CSV.parse(File.open('data.csv', 'r:ISO-8859-1') { |line| line.read })
   fields = csv.shift
   fields = fields.map { |f| f.downcase.gsub(' ', '_') }
-  records = csv.collect { |record| Hash[*fields.zip(record).flatten] }
-  return records
-end
+  all_movies = csv.collect { |record| Hash[*fields.zip(record).flatten] }
 
-# all_movies = csv_to_array('data.csv')
-
-
-def all_movie_sort(all_movies, unsorted)
-  all_movies = all_movies.sort_by { |row| row[:movie_id] }.each do |row|
-    unsorted << [row['movie_id'].to_i, row['rating'].to_i]
+  # movie_id_and_rating = []
+  all_movies.sort_by { |movie| movie[:movie_id] }.each do |movie|
+    movie_id_and_rating << [movie['movie_id'].to_i, movie['rating'].to_i]
   end
-end
 
-def movie_to_array(filename)
-  csv = CSV.parse(File.open(filename, 'r:ISO-8859-1') { |line| line.read })
+  csv = CSV.parse(File.open('item.csv', 'r:ISO-8859-1') { |line| line.read })
   fields = csv.shift
   fields = fields.map { |f| f.gsub(' ', '_') }
-  records = csv.collect { |record| Hash[*fields.zip(record).flatten] }
-  return records
-end
-# movie_by_id = movie_to_array('item.csv')
+  movie_titles = csv.collect { |record| Hash[*fields.zip(record).flatten] }
 
-def movie_by_id_compile(all_movies_info, unsorted_info)
-  temp = all_movies_info.sort_by { |row| row[:movie_id] }.each do |row|
+  # movie_by_id = movie_to_array('item.csv')
+
+  movie_titles.sort_by { |row| row[:movie_id] }.each do |row|
   unsorted_info << [row['movie_id'].to_i, row['title'].to_s]
   end
 end
+
+
 
 # this func needs to have movie_ratings array.  gives final ratings of movie.
 # def ratings_by_id
@@ -59,3 +52,15 @@ end
 # puts "#{r}"
 
 # puts "#{movie_ratings}"
+
+
+
+
+#this stopped working...
+# # req unsorted array
+# def all_movie_sort(all_movies, unsorted)
+#   unsorted = all_movies[1..10].sort_by { |row| row[:movie_id] }.each do |row|
+#     unsorted << [row['movie_id'].to_i, row['rating'].to_i]
+#     return unsorted
+#   end
+# end
