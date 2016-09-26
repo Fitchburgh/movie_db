@@ -1,5 +1,4 @@
 require 'csv'
-require_relative 'array_mods'
 require 'pry'
 
 # This file should run first to build the databases and read the files.

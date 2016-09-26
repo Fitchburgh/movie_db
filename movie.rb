@@ -1,9 +1,4 @@
 require 'CSV'
-require_relative 'rating'
-require_relative 'user'
-require_relative 'run'
-require_relative 'file_reading'
-require_relative 'array_mods'
 
 class Movie
 

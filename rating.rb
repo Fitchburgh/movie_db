@@ -1,10 +1,4 @@
 require 'csv'
-require_relative 'user'
-require_relative 'movie'
-require_relative 'run'
-require_relative 'file_reading'
-require_relative 'array_mods'
-
 
 class Rating
   attr_reader :movie_id, :movie_ratings, :average_movie_rating
